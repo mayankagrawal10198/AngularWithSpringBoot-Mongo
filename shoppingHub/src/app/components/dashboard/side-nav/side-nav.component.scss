@@ -1,0 +1,29 @@
+@use "sass:map";
+
+.nav-container {
+    max-height: 100%;
+    overflow: scroll;
+    color: #000;
+}
+
+.nav-container__list {
+    list-style: none;
+    color: #ff3f6c;
+    text-decoration:link;
+    overflow: scroll;
+}
+
+.nav-container__list--item {
+    color: #000;
+}
+
+input[type="checkbox" i] {
+    border: none;
+    color: #ff3f6c;
+    background-color: #ff3f6c !important;
+}
+
+.nav-container__sections {
+    width: 100;
+    border-bottom: 1px solid #e1e4e8;
+}

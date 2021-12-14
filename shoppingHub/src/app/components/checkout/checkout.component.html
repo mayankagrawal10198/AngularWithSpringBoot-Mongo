@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center center"  class="full-width mb-28"> 
+    <div>
+        <h1>Your Total Payable Amount is:- $ {{getTotalPrice()}} </h1>
+    </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="start" class='ml-28'>
+    <button mat-raised-button class="add margin-8" (click)="navigate('shopping')">
+        Continue Shopping
+    </button>
+    <button mat-raised-button class="add margin-8" (click)="navigate('cart')">
+        Back to Cart
+    </button>
+</div>
+<div fxLayout="row" fxLayoutAlign="center" class='mr-28'>
+    <button mat-raised-button class="add margin-8" (click)="navigate('logout')">
+        Pay: $ {{getTotalPrice()}}
+    </button>
+    <button mat-raised-button class="add margin-8" (click)="navigate('logout')">
+        Logout
+    </button>
+</div>

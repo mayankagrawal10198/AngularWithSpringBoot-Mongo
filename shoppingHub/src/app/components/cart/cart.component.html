@@ -1,0 +1,60 @@
+<div class="full-width shopping-cart">
+    <!-- Title -->
+    <div class="title test-font-bold">
+      Shopping Bag
+    </div>
+
+    <div class="buttons title" *ngIf="products.length === 0">
+      <mat-icon [ngStyle]="{'transform': 'scale(2)' }" class=""> add_shopping_cart </mat-icon>
+      <h1 class="ml-16">Your Cart is Empty!</h1>
+    </div>
+
+    <!-- Product #1 -->
+    <div class="item" *ngFor="let product of products; let i = index">
+      <div class="buttons" (click)="toggle(i)">
+        <mat-icon class="like margin-16" [ngStyle]="{'color': product.isFavorite ? 'red' : 'black' }"> favorite </mat-icon>
+      </div>
+      
+      <div class="image">
+        <img src="http://placehold.it/100x100" alt="" />
+      </div>
+  
+      <div class="pl-32 description">
+        <span>{{ product.productName }}</span>
+      </div>
+  
+      <div class="quantity">
+            <button mat-raised-button (click)="removeOne(i)" [disabled]="product.productCount == 0" class="remove margin-16">
+                <mat-icon class=""> remove </mat-icon>
+            </button>
+            <div class="numberOfItems">
+                {{ product.productCount }}
+            </div>
+            <button mat-raised-button (click)="addOne(i)" class="add margin-16">
+                <mat-icon class=""> add </mat-icon>
+            </button>
+      </div>
+  
+      <div class="total-price test-font-bold margin-16">
+        $ {{product.productPrice}} x {{product.productCount}} = $ {{(product.productPrice * product.productCount)}}
+      </div>
+      <div class="button-clear" (click)="removeProduct(product.productID)">
+        <mat-icon class="clear margin-16"> clear </mat-icon>
+      </div>
+
+    </div>
+    <hr/>
+    <div class="total" *ngIf="products.length !== 0">
+        <div class="title test-font-bold">
+            Total:- $ {{getTotalPrice()}}
+        </div>
+    </div>
+    <div class="last">
+        <button mat-raised-button class="add margin-8" (click)="navigate('shopping')">
+            Continue Shopping
+        </button>
+        <button mat-raised-button class="add margin-8" *ngIf="products.length !== 0" (click)="navigate('checkout')">
+            Proceed to Checkout
+        </button>
+    </div>
+</div>

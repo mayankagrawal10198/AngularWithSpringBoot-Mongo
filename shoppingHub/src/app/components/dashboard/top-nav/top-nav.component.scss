@@ -1,0 +1,15 @@
+.nav-container__list {
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+    height: auto;
+    background: #0366D6;
+}
+
+.nav-container__list--item {
+    color: #fff;
+    height: auto !important;
+}
+
+.nav-container__list :not(:last-child) {
+    border-right: 1px solid #e1e4e8;
+}

@@ -1,0 +1,28 @@
+<section fxLayout fxLayoutAlign="space-around center" class="header-cotainer">
+    <div class="header-icon pt-16 pr-20 pl-20">
+        <p class="font-30 font-bold">Shop</p>
+    </div>
+    <mat-nav-list fxFlex fxLayout="row" fxLayoutAlign="space-around center" class="nav-container__list">
+        <mat-list-item *ngFor="let option of menuOptions">
+            <span fxLayoutAlign="center center" class="mat-list-item" (hover)="onHover()">{{ option }}</span>
+        </mat-list-item>
+        <input type="search">
+        <mat-list-item fxLayoutAlign="center center" class="mat-list-item">
+            <div class="profile">
+                <mat-icon>manage_accounts</mat-icon>
+                Profile
+            </div>
+            <div class="tooltip">
+                <app-hover-container></app-hover-container>
+            </div>
+        </mat-list-item>
+        <mat-list-item fxLayoutAlign="center center" class="mat-list-item red600" (click)="navigateToCart('wish')">
+            <mat-icon [ngStyle]="{'color': 'red' }">favorite</mat-icon>    
+            Wishlist
+        </mat-list-item>
+        <mat-list-item fxLayoutAlign="center center" class="mat-list-item" (click)="navigateToCart('bag')">
+            <mat-icon [matBadge]="products.length" matBadgeColor="warn" class="mr-14">local_mall</mat-icon>
+            Bag
+        </mat-list-item>
+    </mat-nav-list>
+</section>

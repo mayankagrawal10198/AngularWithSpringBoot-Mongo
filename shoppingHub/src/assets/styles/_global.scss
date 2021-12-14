@@ -1,0 +1,93 @@
+@import "font";
+@import "color";
+
+@mixin font-light {
+  font-family: OpenSans-light, "Courier New", Courier, monospace;
+}
+
+@mixin font-regular {
+  font-family: OpenSans-regular, "Courier New", Courier, monospace;
+}
+
+@mixin font-bold {
+  font-family: OpenSans-bold, "Courier New", Courier, monospace;
+}
+
+.font-bold {
+  @include font-bold;
+}
+
+.font-regular {
+  @include font-regular;
+}
+
+@mixin font-italic {
+  font-family: OpenSans-italic, "Courier New", Courier, monospace;
+}
+
+@mixin selectColor($color) {
+  color: map-get($global-colors, $color );
+}
+
+$padding-sides: (
+  'pt': 'padding-top',
+  'pb': 'padding-bottom',
+  'pl': 'padding-left',
+  'pr': 'padding-right',
+);
+$margin-sides: (
+  'mt': 'margin-top',
+  'mb': 'margin-bottom',
+  'ml': 'margin-left',
+  'mr': 'margin-right',
+);
+$margin-sizes: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 48;
+$padding-sizes: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 48;
+@each $size in $padding-sizes {
+  // use pl-10 for padding-left:10px, like wise pr-2, pt-6 and so on as per your use
+  @each $key, $value in $padding-sides {
+    .#{$key}-#{$size} {
+      #{$value}: #{$size}px !important;
+    }
+  }
+  // use padding-10 for padding:10px and so on
+  .padding-#{$size} {
+    padding: #{$size}px !important;
+  }
+  // use padding-horizontal-10 for padding:0px 10px and so on
+  .padding-horizontal-#{$size} {
+    padding: 0px #{$size}px !important;
+  }
+  // use padding-vertical-10 for padding:10px 0px and so on
+  .padding-vertical-#{$size} {
+    padding: #{$size}px 0px !important;
+  }
+}
+
+@each $size in $margin-sizes {
+  // use ml-10 for margin-left:10px, like wise mr-2, mt-6 and so on as per your use
+  @each $key, $value in $margin-sides {
+    .#{$key}-#{$size} {
+      #{$value}: #{$size}px !important;
+    }
+  }
+  // use margin-10 for margin:10px and so on
+  .margin-#{$size} {
+    margin: #{$size}px !important;
+  }
+  // use margin-horizontal-10 for margin:0px 10px and so on
+  .margin-horizontal-#{$size} {
+    margin: 0px #{$size}px !important;
+  }
+  // use margin-vertical-10 for margin:10px 0px and so on
+  .margin-vertical-#{$size} {
+    margin: #{$size}px 0px !important;
+  }
+}
+
+$font-sizes: 6, 8, 10, 12, 13, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40;
+@each $size in $font-sizes {
+  .font-#{$size} {
+    font-size: #{$size}px !important;
+  }
+}

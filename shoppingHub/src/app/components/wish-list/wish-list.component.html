@@ -1,0 +1,42 @@
+<div class="full-width shopping-cart">
+    <!-- Title -->
+    <div class="title test-font-bold">
+      Wishlist Items
+    </div>
+
+    <div class="buttons title" *ngIf="favorites.length === 0">
+      <mat-icon [ngStyle]="{'transform': 'scale(2)' }" class=""> add_shopping_cart </mat-icon>
+      <h1 class="ml-16">Your Wishlist is Empty!</h1>
+    </div>
+
+    <!-- Product #1 -->
+    <div class="item" *ngFor="let favorite of favorites; let i = index">
+      <div class="buttons" (click)="toggle(i)">
+        <mat-icon class="like margin-16" [ngStyle]="{'color': favorite.isFavorite ? 'red' : 'black' }"> favorite </mat-icon>
+      </div>
+      
+      <div class="image">
+        <img src="http://placehold.it/100x100" alt="" />
+      </div>
+  
+      <div class="pl-32 description">
+        <span>{{ favorite.productName }}</span>
+      </div>
+  
+      <div class="total-price test-font-bold margin-16">
+        $ {{favorite.productPrice}}
+      </div>
+      <div class="button-clear" (click)="addProduct(i,favorite.productID)">
+        <button mat-raised-button class="add margin-8" >
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+    <hr/>
+    <div class="last">
+        <button mat-raised-button class="add margin-8" (click)="navigate('shopping')">
+            Continue Shopping
+        </button>
+    </div>
+  </div>

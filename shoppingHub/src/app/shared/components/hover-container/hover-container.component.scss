@@ -1,0 +1,17 @@
+.tooltip {
+    width: 200px;
+    left: -2px;
+    top: 45px;
+    position: absolute;
+    padding: 18px 0px 10px 18px;
+    z-index: 10;
+    border-radius: 16px;
+    background-color: #fff;
+    color: #3e4152;
+    border: 1px solid #f5f5f6;
+    margin: -4px 0;
+}
+
+.border {
+    border-bottom: 1px solid #AAA;
+}

@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../src/assets/styles/global";
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.test-font-light {
+  @include font-light;
+}
+
+.test-font-regular {
+  @include font-regular;
+}
+
+.test-font-bold {
+  @include font-bold;
+}
+

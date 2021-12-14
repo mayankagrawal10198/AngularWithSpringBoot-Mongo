@@ -1,0 +1,127 @@
+.left {
+    float: left;
+    width: 60%;
+}
+
+.right {
+    float: right;
+    width: 40%;
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .left,.right {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .left,.right,.addToCart,.addToWish {
+        width: 100%;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+}
+.title_sub {
+    color: #535665;
+    font-size: 20px;
+    opacity: .8;
+    font-weight: 400;
+}
+.container {
+    padding: 28px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #dbedff;
+}
+.addToCart, .addToWish {
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2EA44F;
+    border: 1px solid #2EA44F;
+    color: #fff;
+    display: inline-flex;
+    text-align: center;
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-right: 3%;
+    min-width: max-content;
+    &:hover {
+        background-color: #3e8e41;
+    }
+    &:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+}
+.addToWish {
+    border: 1px solid #d4d5d9;
+    background-color: #fafbfc;
+    color: #000;
+    &:hover {
+        background-color: #fafbfc;
+    }
+    &:active {
+        background-color: #fafbfc;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+}
+.delivery {
+    padding-top: 18px;
+    //more css needs to add
+    .button {
+        &:hover {
+            background-color: #fafbfc;
+        }
+        &:active {
+            background-color: #fafbfc;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+    }
+}
+.touch:hover,
+.touch:focus {
+    -ms-transform: scale(1.05); 
+    -webkit-transform: scale(1.05); 
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.size {
+    background-color: #fff;
+    border: 1px solid #bfc0c6;
+    border-radius: 50px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+    color: #282c3f;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    position: relative;
+    margin: 10px;
+}
+
+.block {
+    display: flex;
+}
+
+.similarProducts {
+    margin-bottom: 0;
+    padding-top: 30px;
+    clear: both;
+}
+input:valid {
+    color: green;
+}
+input:invalid {
+    color: red;
+}

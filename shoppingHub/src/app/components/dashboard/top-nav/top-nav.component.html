@@ -1,0 +1,30 @@
+<section fxLayout="row" fxLayoutAlign="space-around">
+    <mat-nav-list fxLayout="row" class="nav-container__list pt-0">
+        <ng-container *ngFor="let item of navItems; let i=index">
+            <mat-list-item 
+            class="nav-container__list--item pt-8 pb-8 test-font-regular"
+            [fxHide.sm]="!(i>=2)"
+            [fxHide.gt-md]="!(i>=2)"
+            [fxHide]="i>=2"
+            (click)="goToNavItem(item)"
+            >
+            {{item}}
+            </mat-list-item>
+        </ng-container>
+    </mat-nav-list>
+    <button mat-icon-button [matMenuTriggerFor]="menu" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
+        <mat-icon matBadge="{{navItems.length-2}}" matBadgePosition="after" matBadgeColor="warn">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" fxLayout="column" class="nav-container__list p-0">
+        <mat-nav-list class="nav-container__list pt-0">
+            <ng-container *ngFor="let item of navItems;let i=index">
+                <mat-list-item
+                *ngIf="i>=2"
+                class="nav-container__list--dropdown pt-8 pb-8 test-font-regular"
+                >
+                {{item}}
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </mat-menu>
+</section>

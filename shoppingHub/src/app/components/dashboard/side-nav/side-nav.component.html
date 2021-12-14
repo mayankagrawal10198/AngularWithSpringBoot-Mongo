@@ -1,0 +1,92 @@
+<div class="nav-container pt-24 pb-24" fxLayout="column">
+    <div class="pb-16 nav-container__sections">
+        <span class="font-bold pr-16 pl-16">CATEGORIES</span>
+        <mat-nav-list fxLayout="column" *ngIf="menu" class="nav-container__list">
+            <ng-container *ngFor="let navItem of categeories.items; let i=index">
+                <mat-list-item *ngIf="i<5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+                <ng-container *ngIf="i===5 && !categeories.displayAll">
+                    <div (click)="showmore('categeories')" class="pr-16 pl-16">+{{categeories.items.length - 5}} more</div>
+                </ng-container>
+                <mat-list-item *ngIf="categeories.displayAll && i>=5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </div>
+    <div class="pt-16 pb-16 nav-container__sections">
+        <span class="font-bold pr-16 pl-16">BRANDS</span>
+        <mat-nav-list fxLayout="column" *ngIf="menu" class="nav-container__list">
+            <ng-container *ngFor="let navItem of brands.items; let i=index">
+                <mat-list-item *ngIf="i<5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+                <ng-container *ngIf="i===5 && !brands.displayAll">
+                    <div (click)="showmore('brands')" class="pr-16 pl-16">+{{brands.items.length - 5}} more</div>
+                </ng-container>
+                <mat-list-item *ngIf="brands.displayAll && i>=5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </div>
+    <div class="pt-16 pb-16 nav-container__sections">
+        <span class="font-bold pr-16 pl-16">PRICE</span>
+        <mat-nav-list fxLayout="column" *ngIf="menu" class="nav-container__list">
+            <ng-container *ngFor="let navItem of price.items; let i=index">
+                <mat-list-item *ngIf="i<5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+                <ng-container *ngIf="i===5 && !price.displayAll">
+                    <div (click)="showmore('price')" class="pr-16 pl-16">+{{price.items.length - 5}} more</div>
+                </ng-container>
+                <mat-list-item *ngIf="price.displayAll && i>=5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </div>
+    <div class="pt-16 pb-16 nav-container__sections">
+        <span class="font-bold pr-16 pl-16">COLOR</span>
+        <mat-nav-list fxLayout="column" *ngIf="menu" class="nav-container__list">
+            <ng-container *ngFor="let navItem of colors.items; let i=index">
+                <mat-list-item *ngIf="i<5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+                <ng-container *ngIf="i===5 && !colors.displayAll">
+                    <div (click)="showmore('color')" class="pr-16 pl-16">+{{colors.items.length - 5}} more</div>
+                </ng-container>
+                <mat-list-item *ngIf="colors.displayAll && i>=5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </div>
+    <div class="pt-16 pb-16 nav-container__sections">
+        <span class="font-bold pr-16 pl-16">DISCOUNT RANGE</span>
+        <mat-nav-list fxLayout="column" *ngIf="menu" class="nav-container__list">
+            <ng-container *ngFor="let navItem of discount.items; let i=index">
+                <mat-list-item *ngIf="i<5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+                <ng-container *ngIf="i===5 && !discount.displayAll">
+                    <div (click)="showmore('discount')" class="pr-16 pl-16">+{{discount.items.length - 5}} more</div>
+                </ng-container>
+                <mat-list-item *ngIf="discount.displayAll && i>=5">
+                    <input type="checkbox" class="nav-container__list--item-select">
+                    <span  class="nav-container__list--item">{{ navItem }}</span>
+                </mat-list-item>
+            </ng-container>
+        </mat-nav-list>
+    </div>
+</div>
