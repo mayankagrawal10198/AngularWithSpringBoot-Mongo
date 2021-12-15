@@ -11,13 +11,18 @@ export class ServiceEndpointsService {
   constructor(private http: HttpClient) {}
 
   storeData(postData: User, endpnt: string) {
-    this.http.post<{ any: any }>(endpnt, postData).subscribe(
-      (responseData) => {
-        console.log(responseData);
-      },
-      (error) => {
-        this.error.next(error.message);
-      }
-    );
+    this.http
+      .post<{ any: any }>(endpnt, postData, {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          alert(responseData.body);
+        },
+        (error) => {
+          alert(error.error.message);
+          this.error.next(error.message);
+        }
+      );
   }
 }

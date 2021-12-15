@@ -1,96 +1,194 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="full-width bg">
-    <mat-card>
-      <mat-card-header fxLayout="row" fxLayoutAlign="center center">
-        <mat-card-title class="font-bold mb-32 font-32">{{ !signup ? 'LogIn' : 'SignUp' }}</mat-card-title>
-      </mat-card-header>
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <mat-card-content class="font-regular" fxLayout="column"> 
-          <mat-form-field *ngIf="signup" appearance="outline" class="respWidth mb-16" fxFlex="1 1 auto">
-            <mat-label>E-MAIL ADDRESS</mat-label>
-            <input matInput placeholder=""
-              type="email"
-              id="email"
-              ngModel
-              name="email"
-              required
-              email
-              #email="ngModel"
-            >
-            <mat-icon *ngIf="email.touched else email_icon" matSuffix>{{ email.valid ? "sentiment_very_satisfied" : "sentiment_very_dissatisfied" }}</mat-icon>
-            <ng-template #email_icon><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template>
-            <mat-hint *ngIf="!email.valid && email.touched">Enter Valid Email Address</mat-hint>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="respWidth mb-16" fxFlex="1 1 auto">
-            <mat-label>UserName</mat-label>
-            <input matInput placeholder=""
-              type="text"
-              id="user"
-              ngModel
-              name="user"
-              required
-              #user="ngModel"
-            >
-            <mat-icon *ngIf="user.touched else user_icon" matSuffix>{{ user.valid ? "sentiment_very_satisfied" : "sentiment_very_dissatisfied" }}</mat-icon>
-            <ng-template #user_icon><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template>
-            <mat-hint *ngIf="!user.valid && user.touched">Enter Valid UserName</mat-hint>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="respWidth mb-16" fxFlex="1 1 auto"> 
-            <mat-label>PASSWORD</mat-label>
-            <input matInput placeholder="" 
-              type="password"
-              id="pass"
-              [(ngModel)]="passwordValidation"
-              name="pass"
-              [maxlength]="maxLength"
-              required
-              #pass="ngModel"
-              (ngModelChange)="newPasswordValidityCheck(passwordValidation)"
-              (focus)="showPasswordValidationPopup()"
-              (focusout)="hidePasswordValidationPopup()"
-            >
-            <mat-icon *ngIf="pass.touched else pass_icon" matSuffix>{{ validPassword ? "sentiment_very_satisfied" : "sentiment_very_dissatisfied" }}</mat-icon>
-            <ng-template #pass_icon><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template>
-            <mat-hint *ngIf="!pass.valid && pass.touched">Please Enter Password</mat-hint>
-          </mat-form-field>
+  <mat-card>
+    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-title class="font-bold mb-32 font-32">{{
+        !signup ? "LogIn" : "SignUp"
+      }}</mat-card-title>
+    </mat-card-header>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" style="flex-direction: column">
+      <mat-card-content class="font-regular" fxLayout="column">
+        <mat-form-field
+          appearance="outline"
+          class="respWidth mb-16"
+          fxFlex="1 1 auto"
+        >
+          <mat-label>E-MAIL ADDRESS</mat-label>
+          <input
+            matInput
+            placeholder=""
+            type="email"
+            id="email"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+          />
+          <mat-icon *ngIf="email.touched; else email_icon" matSuffix>{{
+            email.valid
+              ? "sentiment_very_satisfied"
+              : "sentiment_very_dissatisfied"
+          }}</mat-icon>
+          <ng-template #email_icon
+            ><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template
+          >
+          <mat-hint *ngIf="!email.valid && email.touched"
+            >Enter Valid Email Address</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="signup"
+          appearance="outline"
+          class="respWidth mb-16"
+          fxFlex="1 1 auto"
+        >
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder=""
+            type="text"
+            id="user"
+            ngModel
+            name="user"
+            required
+            #user="ngModel"
+          />
+          <mat-icon *ngIf="user.touched; else user_icon" matSuffix>{{
+            user.valid
+              ? "sentiment_very_satisfied"
+              : "sentiment_very_dissatisfied"
+          }}</mat-icon>
+          <ng-template #user_icon
+            ><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template
+          >
+          <mat-hint *ngIf="!user.valid && user.touched"
+            >Enter Valid UserName</mat-hint
+          >
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          class="respWidth mb-16"
+          fxFlex="1 1 auto"
+        >
+          <mat-label>PASSWORD</mat-label>
+          <input
+            matInput
+            placeholder=""
+            type="password"
+            id="pass"
+            [(ngModel)]="passwordValidation"
+            name="pass"
+            [maxlength]="maxLength"
+            required
+            #pass="ngModel"
+            (ngModelChange)="newPasswordValidityCheck(passwordValidation)"
+            (focus)="showPasswordValidationPopup()"
+          />
+          <!-- (focusout)="hidePasswordValidationPopup()" -->
+          <mat-icon *ngIf="pass.touched; else pass_icon" matSuffix>{{
+            validPassword
+              ? "sentiment_very_satisfied"
+              : "sentiment_very_dissatisfied"
+          }}</mat-icon>
+          <ng-template #pass_icon
+            ><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template
+          >
+          <mat-hint *ngIf="!pass.valid && pass.touched"
+            >Please Enter Password</mat-hint
+          >
+        </mat-form-field>
 
-          <div class="" *ngIf="showPasswordValidation && signup">
-            <div class="password-validation-popup">
-              <div [ngClass]="{ 'valid-scenario': minLengthCheck }">
-                <mat-icon [ngClass]="{ 'valid-scenario': minLengthCheck }">check_circle_outline</mat-icon>
-                8 or more characters
-              </div>
-              <div  [ngClass]="{ 'valid-scenario': numCheck }">
-                <mat-icon [ngClass]="{ 'valid-scenario': numCheck }">check_circle_outline</mat-icon>
-                1 or more numbers
-              </div>
-              <div  [ngClass]="{ 'valid-scenario': capitalCharCheck }">
-                <mat-icon [ngClass]="{ 'valid-scenario': capitalCharCheck }">check_circle_outline</mat-icon>
-                Uppercase characters
-              </div>
-              <div  [ngClass]="{ 'valid-scenario': smallCharCheck }">
-                <mat-icon [ngClass]="{ 'valid-scenario': smallCharCheck }">check_circle_outline</mat-icon>
-                Lowercase characters
-              </div>
-              <div  [ngClass]="{ 'valid-scenario': specialCharCheck }">
-                <mat-icon [ngClass]="{ 'valid-scenario': specialCharCheck }">check_circle_outline</mat-icon>
-                Special characters :- @ # $ % ^
-              </div>
+        <div class="" *ngIf="showPasswordValidation && signup">
+          <div class="password-validation-popup">
+            <div [ngClass]="{ 'valid-scenario': minLengthCheck }">
+              <mat-icon [ngClass]="{ 'valid-scenario': minLengthCheck }"
+                >check_circle_outline</mat-icon
+              >
+              8 or more characters
+            </div>
+            <div [ngClass]="{ 'valid-scenario': numCheck }">
+              <mat-icon [ngClass]="{ 'valid-scenario': numCheck }"
+                >check_circle_outline</mat-icon
+              >
+              1 or more numbers
+            </div>
+            <div [ngClass]="{ 'valid-scenario': capitalCharCheck }">
+              <mat-icon [ngClass]="{ 'valid-scenario': capitalCharCheck }"
+                >check_circle_outline</mat-icon
+              >
+              Uppercase characters
+            </div>
+            <div [ngClass]="{ 'valid-scenario': smallCharCheck }">
+              <mat-icon [ngClass]="{ 'valid-scenario': smallCharCheck }"
+                >check_circle_outline</mat-icon
+              >
+              Lowercase characters
+            </div>
+            <div [ngClass]="{ 'valid-scenario': specialCharCheck }">
+              <mat-icon [ngClass]="{ 'valid-scenario': specialCharCheck }"
+                >check_circle_outline</mat-icon
+              >
+              Special characters :- @ # $ % ^
             </div>
           </div>
-
-        </mat-card-content>
-        <mat-checkbox #checkbox (change)='checkboxClicked(checkbox.checked)'class="font-regular font-16 mb-24">Remember Me</mat-checkbox>
-        <div fxLayout="row" fxLayoutAlign="center center" class="pb-24">
-            <button mat-raised-button color="warn" type="submit" class="btn-wd font-bold font-20" [disabled]="!f.valid || !validPassword">{{ !signup ? 'LogIn' : 'SignUp' }}</button>
         </div>
-      </form>
-      <div class="mt-16 font-regular font-16" fxLayout="row" fxLayoutAlign="space-around center">
-        <a class="c-Link pr-12" routerLink="forgotPass" routerLinkActive="active">
-          Forgot Password ?
-        </a>
-        <a class="c-Link" (click)="signUp()">
-          {{ !signup ? 'Create Account' : 'Already Registered' }}
-        </a>
+      </mat-card-content>
+      <mat-form-field
+        *ngIf="signup"
+        appearance="outline"
+        class="respWidth mb-16"
+        fxFlex="1 1 auto"
+      >
+        <mat-label>DOB</mat-label>
+        <input
+          matInput
+          placeholder=""
+          type="date"
+          id="dob"
+          ngModel
+          [max]="maxDate"
+          name="dob"
+          required
+          #dob="ngModel"
+        />
+        <mat-icon *ngIf="dob.touched; else dob_icon" matSuffix>{{
+          dob.valid ? "sentiment_very_satisfied" : "sentiment_very_dissatisfied"
+        }}</mat-icon>
+        <ng-template #dob_icon
+          ><mat-icon matSuffix>{{ icon_status }}</mat-icon></ng-template
+        >
+        <mat-hint *ngIf="!dob.valid && dob.touched">Enter Valid DOB</mat-hint>
+      </mat-form-field>
+      <mat-checkbox
+        #checkbox
+        (change)="checkboxClicked(checkbox.checked)"
+        class="font-regular font-16 mb-24"
+        style="display: flex"
+        >Remember Me</mat-checkbox
+      >
+      <div fxLayout="row" fxLayoutAlign="center center" class="pb-24">
+        <button
+          mat-raised-button
+          color="warn"
+          type="submit"
+          class="btn-wd font-bold font-20"
+          [disabled]="!f.valid || !validPassword"
+        >
+          {{ !signup ? "LogIn" : "SignUp" }}
+        </button>
       </div>
-    </mat-card>
+    </form>
+    <div
+      class="mt-16 font-regular font-16"
+      fxLayout="row"
+      fxLayoutAlign="space-around center"
+    >
+      <a class="c-Link pr-12" routerLink="forgotPass" routerLinkActive="active">
+        Forgot Password ?
+      </a>
+      <a class="c-Link" (click)="signUp()">
+        {{ !signup ? "Create Account" : "Already Registered" }}
+      </a>
+    </div>
+  </mat-card>
 </div>

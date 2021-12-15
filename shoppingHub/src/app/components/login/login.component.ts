@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   signup: boolean = false;
   minLength: number = 8;
   maxLength: number = 20;
+  maxDate: string = new Date().toISOString().split('T')[0];
   checkboxStatus: boolean = false;
   showPasswordValidation: boolean = false;
   minLengthCheck: boolean = false;
@@ -56,16 +57,32 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     //form.reset();
-    this.router.navigate(['./dashboard'], {
-      relativeTo: this.activatedRoute.parent,
-    });
     this.addUser(form.value.email, form.value.user, form.value.pass);
     if (this.signup) {
-      this.onCreatePost(form.value.email, form.value.user, form.value.pass);
+      this.onCreatePost(
+        'signUp',
+        form.value.email,
+        form.value.user,
+        form.value.pass,
+        form.value.dob,
+        'http://localhost:8080/newUser'
+      );
+      // this.router.navigate(['./login'], {
+      //   relativeTo: this.activatedRoute.parent,
+      // });
     } else {
-      //AuthService
+      this.onCreatePost(
+        'login',
+        form.value.email,
+        form.value.user,
+        form.value.pass,
+        form.value.dob,
+        'http://localhost:8080/user'
+      );
+      // this.router.navigate(['./dashboard'], {
+      //   relativeTo: this.activatedRoute.parent,
+      // });
     }
-    console.log(this.users);
   }
 
   signUp() {
@@ -81,10 +98,32 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.checkboxStatus = status;
   }
 
-  onCreatePost(email: string, name: string, pass: string) {
-    const postData: User = { name: name, email: email, pass: pass };
-    const endpnt: string = 'http://localhost:8080/';
-    this.serviceEndpointsService.storeData(postData, endpnt);
+  onCreatePost(
+    action: string,
+    email: string,
+    name: string,
+    pass: string,
+    dob: string,
+    url: string
+  ) {
+    const endpnt: string = url;
+    if (action === 'signUp') {
+      let date = {
+        year: +dob.split('-')[0],
+        month: +dob.split('-')[1],
+        day: +dob.split('-')[2],
+      };
+      const postData: User = {
+        name: name,
+        email: email,
+        pass: pass,
+        dob: date,
+      };
+      this.serviceEndpointsService.storeData(postData, endpnt);
+    } else if (action === 'login') {
+      const postData: User = { email: email, pass: pass };
+      this.serviceEndpointsService.storeData(postData, endpnt);
+    }
   }
 
   newPasswordValidityCheck(passCheck: string) {

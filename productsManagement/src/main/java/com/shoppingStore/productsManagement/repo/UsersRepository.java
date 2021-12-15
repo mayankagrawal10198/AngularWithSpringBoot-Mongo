@@ -1,8 +1,11 @@
 package com.shoppingStore.productsManagement.repo;
 
-import com.shoppingStore.productsManagement.util.User;
+import com.shoppingStore.productsManagement.util.NewUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UsersRepository extends MongoRepository<User, Integer> {
+import java.util.Optional;
 
+public interface UsersRepository extends MongoRepository<NewUser, String> {
+
+    NewUser findByUserId(String s);
 }
