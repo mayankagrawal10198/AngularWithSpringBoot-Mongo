@@ -3,21 +3,15 @@ package com.shoppingStore.productsManagement.util;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users")
-public class NewUser {
-    @Id
-    private String userId;
+
+public class NewUserModel {
     private String name;
     private String email;
     private String pass;
     private Dob dob;
     //private Address address;
 
-    public NewUser() {
-
-    }
-
-    public NewUser(String name, String email, String pass, Dob dob){    //, Address address) {
+    public NewUserModel(String name, String email, String pass, Dob dob){    //, Address address) {
         this.name = name;
         this.email = email;
         this.pass = pass;
@@ -49,15 +43,7 @@ public class NewUser {
         this.pass = pass;
     }
 
-    public String getId() {
-        return userId;
-    }
-
-    public void setId(String id) {
-        this.userId = id;
-    }
-
-        public Dob getDob() {
+    public Dob getDob() {
         return dob;
     }
 
