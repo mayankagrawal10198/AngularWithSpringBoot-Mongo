@@ -17,7 +17,7 @@ export class ServiceEndpointsService {
       })
       .subscribe(
         (responseData) => {
-          alert(responseData.body);
+          console.log(responseData);
         },
         (error) => {
           alert(error.error.message);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Base64;
 import java.util.Locale;
 
 @RestController
@@ -23,6 +24,8 @@ public class MyController {
     @PostMapping("/newUser")
     public ResponseEntity addUser(@RequestBody NewUser user) {
         user.setId(user.getEmail().toLowerCase());
+        user.setPass(Base64.getEncoder()
+                .encodeToString(user.getPass().getBytes()));
         ResponseStatus res = new ResponseStatus();
         if(this.usersRepository.findByUserId(user.getEmail().toLowerCase())==null) {
             this.usersRepository.save(user);
@@ -40,7 +43,8 @@ public class MyController {
         NewUser getDetails = this.usersRepository.findByUserId(user.getEmail().toLowerCase());
         ResponseStatus res = new ResponseStatus();
         if(getDetails!=null){
-            if(getDetails.getPass().equals(user.getPass())){
+            if(getDetails.getPass().equals(Base64.getEncoder()
+                    .encodeToString(user.getPass().getBytes()))){
                 res.setMessage("User Authenticated");
                 return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
             }
