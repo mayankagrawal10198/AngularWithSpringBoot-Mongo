@@ -7,7 +7,7 @@ import com.shoppingStore.productsManagement.util.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +19,13 @@ public class MyController {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/newUser")
     public ResponseEntity addUser(@RequestBody NewUser user) {
         user.setId(user.getEmail().toLowerCase());
+        user.setPass(passwordEncoder.encode(user.getPass()));
         ResponseStatus res = new ResponseStatus();
         if(this.usersRepository.findByUserId(user.getEmail().toLowerCase())==null) {
             this.usersRepository.save(user);
@@ -40,7 +43,7 @@ public class MyController {
         NewUser getDetails = this.usersRepository.findByUserId(user.getEmail().toLowerCase());
         ResponseStatus res = new ResponseStatus();
         if(getDetails!=null){
-            if(getDetails.getPass().equals(user.getPass())){
+            if(passwordEncoder.matches(user.getPass(), getDetails.getPass())){
                 res.setMessage("User Authenticated");
                 return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
             }
