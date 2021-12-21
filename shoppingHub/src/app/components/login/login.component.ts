@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   // @Select(UserState.getUsers) users$: Observable<User>
   users: Observable<User>;
   error: string = '';
+  res: string = '';
   errorSub: Subscription = new Subscription();
   constructor(
     private router: Router,
@@ -48,16 +49,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.errorSub = this.serviceEndpointsService.error.subscribe(
-      (errorMessage) => {
-        this.error = errorMessage;
-      }
-    );
+    // this.errorSub = this.serviceEndpointsService.error.subscribe(
+    //   (errorMessage) => {
+    //     this.error = errorMessage;
+    //   }
+    // );
   }
 
   onSubmit(form: NgForm) {
-    //form.reset();
-    this.addUser(form.value.email, form.value.user, form.value.pass);
     if (this.signup) {
       this.onCreatePost(
         'signUp',
@@ -67,9 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         form.value.dob,
         'http://localhost:8080/newUser'
       );
-      // this.router.navigate(['./login'], {
-      //   relativeTo: this.activatedRoute.parent,
-      // });
     } else {
       this.onCreatePost(
         'login',
@@ -79,10 +75,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         form.value.dob,
         'http://localhost:8080/user'
       );
-      // this.router.navigate(['./dashboard'], {
-      //   relativeTo: this.activatedRoute.parent,
-      // });
     }
+    this.addUser(form.value.email, form.value.name, form.value.pass);
+    form.reset();
   }
 
   signUp() {
@@ -119,10 +114,40 @@ export class LoginComponent implements OnInit, OnDestroy {
         pass: pass,
         dob: date,
       };
-      this.serviceEndpointsService.storeData(postData, endpnt);
+      this.serviceEndpointsService.storeData(postData, endpnt).subscribe(
+        (responseData) => {
+          if (responseData.status == 201) {
+            alert('User Created Successfully.. Please Login to Shop');
+            this.router.navigate(['./login'], {
+              relativeTo: this.activatedRoute.parent,
+            });
+          } else if (responseData.status == 208) {
+            alert('User Already Exists.. Try with different Credentials');
+          } else {
+            alert('Something Went wrong.. Try again');
+          }
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      );
     } else if (action === 'login') {
       const postData: User = { email: email, pass: pass };
-      this.serviceEndpointsService.storeData(postData, endpnt);
+      this.serviceEndpointsService.storeData(postData, endpnt).subscribe(
+        (responseData) => {
+          if (responseData.status == 202) {
+            alert('Welcome!!!');
+            this.router.navigate(['./dashboard'], {
+              relativeTo: this.activatedRoute.parent,
+            });
+          } else {
+            alert('Something Went wrong.. Try again');
+          }
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      );
     }
   }
 

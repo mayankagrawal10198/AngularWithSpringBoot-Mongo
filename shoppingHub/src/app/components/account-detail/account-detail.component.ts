@@ -5,30 +5,25 @@ import { CartService } from 'src/app/core/cart-service/cart-service.service';
 @Component({
   selector: 'app-account-detail',
   templateUrl: './account-detail.component.html',
-  styleUrls: ['./account-detail.component.scss']
+  styleUrls: ['./account-detail.component.scss'],
 })
-export class AccountDetailComponent implements OnInit, OnDestroy{
-
-  actSub: Subscription = new Subscription;
+export class AccountDetailComponent implements OnInit, OnDestroy {
+  actSub: Subscription = new Subscription();
   user: string = '';
 
-  constructor(
-    private cartService: CartService,
-  ) {
-    this.actSub = this.cartService.getUserName.subscribe(value => {
-      this.user = value;
-    });
-   }
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
+    this.actSub = this.cartService.getUserName.subscribe((value) => {
+      this.user = value;
+    });
   }
 
-  getUserName() : string {
+  getUserName(): string {
     return this.user;
   }
 
   ngOnDestroy(): void {
-      this.actSub.unsubscribe();
+    this.actSub.unsubscribe();
   }
-
 }

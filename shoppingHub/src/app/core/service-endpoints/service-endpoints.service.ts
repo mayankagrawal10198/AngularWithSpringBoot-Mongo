@@ -7,22 +7,11 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ServiceEndpointsService {
-  error = new Subject<string>();
   constructor(private http: HttpClient) {}
 
   storeData(postData: User, endpnt: string) {
-    this.http
-      .post<{ any: any }>(endpnt, postData, {
-        observe: 'response',
-      })
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        },
-        (error) => {
-          alert(error.error.message);
-          this.error.next(error.message);
-        }
-      );
+    return this.http.post<{ any: any }>(endpnt, postData, {
+      observe: 'response',
+    });
   }
 }
