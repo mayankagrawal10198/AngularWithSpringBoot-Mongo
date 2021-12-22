@@ -1,7 +1,7 @@
 import { ServiceEndpointsService } from './../../core/service-endpoints/service-endpoints.service';
 import { UserState } from './../../shared/store/state/user.state';
 import { User } from './../../shared/store/interfaces/user.model';
-import { AddUser } from './../../shared/store/actions/user.action';
+import { AddUserDetails } from './../../shared/store/actions/user.action';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   validPassword: boolean = false;
   passwordValidation: string = '';
   // @Select(UserState.getUsers) users$: Observable<User>
-  users: Observable<User>;
   error: string = '';
   res: string = '';
   errorSub: Subscription = new Subscription();
@@ -44,9 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private serviceEndpointsService: ServiceEndpointsService,
     private cartService: CartService
-  ) {
-    this.users = this.store.select((state) => state.users.users);
-  }
+  ) {}
 
   ngOnInit(): void {
     // this.errorSub = this.serviceEndpointsService.error.subscribe(
@@ -76,7 +73,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         'http://localhost:8080/user'
       );
     }
-    this.addUser(form.value.email, form.value.name, form.value.pass);
     form.reset();
   }
 
@@ -84,9 +80,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.signup = !this.signup;
   }
 
-  addUser(email: string, name: string, pass: string) {
-    this.store.dispatch(new AddUser({ name, email, pass }));
-    this.cartService.getUserName.next(name);
+  addUser(email: string, name: string) {
+    this.store.dispatch(new AddUserDetails({ name, email }));
   }
 
   checkboxClicked(status: boolean) {
@@ -137,6 +132,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         (responseData) => {
           if (responseData.status == 202) {
             alert('Welcome!!!');
+            this.addUser(email, 'Hola');
             this.router.navigate(['./dashboard'], {
               relativeTo: this.activatedRoute.parent,
             });

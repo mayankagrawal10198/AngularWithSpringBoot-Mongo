@@ -1,7 +1,7 @@
-import { User } from '../interfaces/user.model';
+import { UserDetails } from '../interfaces/user.model';
 
-export class AddUser {
-    static readonly type = '[User] Add';
+export class AddUserDetails {
+  static readonly type = '[UserDetails] Add';
 
-    constructor(public payload: User) {}
+  constructor(public payload: UserDetails) {}
 }

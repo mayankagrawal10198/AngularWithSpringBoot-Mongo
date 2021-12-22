@@ -10,3 +10,12 @@ export interface Dob {
   month: number;
   day: number;
 }
+
+export interface Res {
+  message: string;
+}
+
+export interface UserDetails {
+  name: string;
+  email: string;
+}

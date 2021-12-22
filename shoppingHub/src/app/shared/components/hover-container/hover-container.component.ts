@@ -6,46 +6,41 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Select } from '@ngxs/store';
 
-@Component ({
-    selector: 'app-hover-container',
-    templateUrl: 'hover-container.component.html',
-    styleUrls: ['hover-container.component.scss']
+@Component({
+  selector: 'app-hover-container',
+  templateUrl: 'hover-container.component.html',
+  styleUrls: ['hover-container.component.scss'],
 })
+export class HoverContainer implements OnInit, OnDestroy {
+  // @Select(UserState.getUsers)
+  // users$!: Observable<User>;
+  actSub: Subscription = new Subscription();
+  user: string = '';
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-export class HoverContainer implements OnInit , OnDestroy{
+  ngOnInit(): void {}
 
-    // @Select(UserState.getUsers)
-    // users$!: Observable<User>;
-    actSub: Subscription = new Subscription;
-    user: string = '';
-    constructor(
-        private cartService: CartService,
-        private router: Router,
-        private activatedRoute: ActivatedRoute, 
-    ) { 
-        this.actSub = this.cartService.getUserName.subscribe(value => {
-            this.user = value;
-        });
+  goToNavigation(str: string): void {
+    if (str === 'acct') {
+      this.router.navigate(['./account-detail'], {
+        relativeTo: this.activatedRoute.parent,
+      });
+    } else {
+      this.router.navigate(['./login'], {
+        relativeTo: this.activatedRoute.parent,
+      });
     }
-    
-    ngOnInit(): void {
-    
-    }
+  }
 
-    goToNavigation(str: string): void {
-        if(str === 'acct') {
-            this.router.navigate(['./account-detail'],{ relativeTo: this.activatedRoute.parent });
-        }
-        else {
-            this.router.navigate(['./login'],{ relativeTo: this.activatedRoute.parent });
-        }
-    }
+  getUserName(): string {
+    return this.user;
+  }
 
-    getUserName() : string {
-        return this.user;
-    }
-
-    ngOnDestroy(): void {
-        this.actSub.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.actSub.unsubscribe();
+  }
 }

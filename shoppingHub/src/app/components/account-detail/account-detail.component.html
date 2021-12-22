@@ -1,20 +1,42 @@
 <div class="parent-div">
-    <div class="left">
-        <img class="img margin-vertical-16" src="http://placehold.it/300x300" alt="" />
-        <div class="ml-16">
-            <h1>{{getUserName()}}</h1>
-            <h2>username1221@xxxx.com</h2>
-            <button mat-raised-button class="button">
-                <mat-icon class=""> article </mat-icon>
-                Edit Details
-            </button>
-        </div>
+  <div class="left">
+    <img
+      id="pic"
+      class="img margin-vertical-16"
+      src="http://placehold.it/300x300"
+      alt=""
+    />
+    <div class="ml-16">
+      <h1>{{ getUserName() }}</h1>
+      <h2>{{ getUserEmail() }}</h2>
+      <!-- <form
+        (ngSubmit)="onSubmit(f)"
+        #f="ngForm"
+        enctype="multipart/form-data"
+        style="flex-direction: row"
+      > -->
+      <label for="userPic">Upload Pic</label>
+      <input
+        type="file"
+        name="userPic"
+        id="userPic"
+        (change)="uploadPic($event)"
+        required
+        #userPic
+        accept=".jpg, .jpeg, .png"
+      />
+      <!-- <button mat-raised-button class="button" (click)="uploadPic()">
+          <mat-icon class=""> article </mat-icon>
+          Edit picture
+        </button> -->
+      <!-- </form> -->
     </div>
-    <div class="right">
-        <div class="border">Name</div>
-        <div class="border">Mobile Number</div>
-        <div class="border">Password</div>
-        <div class="border">Saved Address</div>
-        <div class="border">Saved card</div>        
-    </div>
+  </div>
+  <div class="right">
+    <div class="border">Name</div>
+    <div class="border">Mobile Number</div>
+    <div class="border">Password</div>
+    <div class="border">Saved Address</div>
+    <div class="border">Saved card</div>
+  </div>
 </div>

@@ -1,31 +1,35 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { User } from '../interfaces/user.model';
-import { AddUser } from '../actions/user.action';
+import { UserDetails } from '../interfaces/user.model';
+import { AddUserDetails } from '../actions/user.action';
 import { Injectable } from '@angular/core';
 
 export class UserStateModel {
-    users: User[] = [];
+  details: UserDetails = { name: '', email: '' };
 }
 
 @State<UserStateModel>({
-    name: 'users',
-    defaults: {
-        users: [],
-    },
+  name: 'user',
+  defaults: {
+    details: { name: '', email: '' },
+  },
 })
 @Injectable()
 export class UserState {
+  @Selector()
+  static getUsers(state: UserStateModel) {
+    return state.details;
+  }
 
-    @Selector()
-    static getUsers(state: UserStateModel) {
-        return state.users;
-    }
-
-    @Action(AddUser)
-    add({getState, patchState }: StateContext<UserStateModel>, { payload }: AddUser) {
-        const state = getState();
-        patchState({
-            users: [...state.users, payload]
-        });
-    }
+  @Action(AddUserDetails)
+  addUserDetails(
+    { getState, patchState }: StateContext<UserStateModel>,
+    { payload }: AddUserDetails
+  ) {
+    const state = getState();
+    console.log(payload);
+    patchState({
+      details: Object.assign({}, payload),
+    });
+    console.log(state.details);
+  }
 }

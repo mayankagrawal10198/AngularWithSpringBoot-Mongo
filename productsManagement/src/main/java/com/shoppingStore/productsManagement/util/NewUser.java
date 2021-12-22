@@ -1,5 +1,6 @@
 package com.shoppingStore.productsManagement.util;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,7 +12,12 @@ public class NewUser {
     private String email;
     private String pass;
     private Dob dob;
+    private Binary pic;
     //private Address address;
+
+    public NewUser() {
+
+    }
 
     public NewUser(String name, String email, String pass, Dob dob){    //, Address address) {
         this.name = name;
@@ -68,4 +74,13 @@ public class NewUser {
 //    public void setAddress(Address address) {
 //        this.address = address;
 //    }
+
+
+    public Binary getPic() {
+        return pic;
+    }
+
+    public void setPic(Binary pic) {
+        this.pic = pic;
+    }
 }
