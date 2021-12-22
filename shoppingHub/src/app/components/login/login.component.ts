@@ -80,10 +80,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.signup = !this.signup;
   }
 
-  addUser(email: string, name: string) {
-    this.store.dispatch(new AddUserDetails({ name, email }));
-  }
-
   checkboxClicked(status: boolean) {
     this.checkboxStatus = status;
   }
@@ -132,7 +128,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         (responseData) => {
           if (responseData.status == 202) {
             alert('Welcome!!!');
-            this.addUser(email, 'Hola');
+            this.addUser(
+              email,
+              JSON.parse(JSON.stringify(responseData)).body.message.split(
+                '/'
+              )[1]
+            );
             this.router.navigate(['./dashboard'], {
               relativeTo: this.activatedRoute.parent,
             });
@@ -159,7 +160,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.smallCharCheck &&
       this.numCheck &&
       this.specialCharCheck;
-    console.log(this.validPassword);
   }
 
   showPasswordValidationPopup() {
@@ -168,6 +168,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   hidePasswordValidationPopup() {
     this.showPasswordValidation = false;
+  }
+
+  addUser(email: string, name: string) {
+    this.store.dispatch(new AddUserDetails({ name, email }));
   }
 
   ngOnDestroy() {

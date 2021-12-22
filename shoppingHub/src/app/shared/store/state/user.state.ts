@@ -25,11 +25,11 @@ export class UserState {
     { getState, patchState }: StateContext<UserStateModel>,
     { payload }: AddUserDetails
   ) {
-    const state = getState();
     console.log(payload);
     patchState({
       details: Object.assign({}, payload),
     });
+    const state = getState();
     console.log(state.details);
   }
 }

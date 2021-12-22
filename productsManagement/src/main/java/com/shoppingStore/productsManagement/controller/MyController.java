@@ -50,7 +50,7 @@ public class MyController {
         if(getDetails!=null){
             if(getDetails.getPass().equals(Base64.getEncoder()
                     .encodeToString(user.getPass().getBytes()))){
-                res.setMessage("User Authenticated");
+                res.setMessage("User Authenticated/"+getDetails.getName());
                 return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
             }
             else{
@@ -80,13 +80,12 @@ public class MyController {
 
     @PostMapping("/updateUserPic/{id}")
     public ResponseEntity updatePic(@PathVariable("id") String Id,@RequestParam("userPic") MultipartFile file) throws IOException {
-        System.out.println(file);
         ResponseStatus res = new ResponseStatus();
         NewUser newUser = this.usersRepository.findByUserId(Id.toLowerCase());
         newUser.setPic(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
         this.usersRepository.save(newUser);
-        //res.setMessage(Base64.getEncoder().encodeToString(newUser.getPic().getData()));
-        res.setMessage("done");
+        res.setMessage(Base64.getEncoder().encodeToString(newUser.getPic().getData()));
+        //res.setMessage("done");
         return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
     }
 }

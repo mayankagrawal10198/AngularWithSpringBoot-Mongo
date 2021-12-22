@@ -27,7 +27,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
     private store: Store,
     private serviceEndpointsService: ServiceEndpointsService
   ) {
-    this.user = this.store.select((state) => state.users.details);
+    this.user = this.store.select((state) => state.user.details);
     this.user.subscribe((value) => {
       this.userDetails = Object.assign({}, value);
     });
@@ -79,7 +79,9 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
               .getElementById('pic')
               ?.setAttribute(
                 'src',
-                `data:image/png;base64,${data.body?.message}`
+                `data:image/png;base64,${
+                  JSON.parse(JSON.stringify(data)).body.message
+                }`
               );
           },
           (error) => {
