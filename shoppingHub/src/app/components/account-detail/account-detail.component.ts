@@ -70,7 +70,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
       this.serviceEndpointsService
         .storePic(
           formData,
-          'http://localhost:8080/updateUserPic/ma@gmail.com' //+this.getUserEmail()
+          'http://localhost:8080/updateUserPic/' + this.getUserEmail()
         )
         .subscribe(
           (data) => {

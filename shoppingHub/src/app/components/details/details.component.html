@@ -1,79 +1,100 @@
 <div class="container">
-    <div class="left">
-        <img class="margin-8 touch" src="http://placehold.it/325x450">
-        <img class="margin-8 touch" src="http://placehold.it/325x450">
-        <img class="margin-8 touch" src="http://placehold.it/325x450">
-        <img class="margin-8 touch" src="http://placehold.it/325x450">
+  <div class="left">
+    <img class="margin-8 touch" src="http://placehold.it/325x450" />
+    <img class="margin-8 touch" src="http://placehold.it/325x450" />
+    <img class="margin-8 touch" src="http://placehold.it/325x450" />
+    <img class="margin-8 touch" src="http://placehold.it/325x450" />
+  </div>
+  <div class="right">
+    <h1 class="title">{{ getDetails("prodName") }}</h1>
+    <h2 class="title_sub">{{ getDetails("prodDesc") }}</h2>
+    <h3>Rating:- {{ getDetails("rating") }}</h3>
+    <h2>${{ getDetails("price") }}</h2>
+    <h4 class="mb-6">SELECT SIZE</h4>
+    <div class="block mb-6">
+      <div class="size">
+        <p class="mt-12">S</p>
+      </div>
+      <div class="size">
+        <p class="mt-12">M</p>
+      </div>
+      <div class="size">
+        <p class="mt-12">L</p>
+      </div>
+      <div class="size">
+        <p class="mt-12">XL</p>
+      </div>
+      <div class="size">
+        <p class="mt-12">XXL</p>
+      </div>
     </div>
-    <div class="right">
-        <h1 class="title">{{getDetails('prodName')}}</h1>
-        <h2 class="title_sub">{{getDetails('prodDesc')}}</h2>
-        <h3>Rating:- {{getDetails('rating')}}</h3>
-        <h2>${{getDetails('price')}}</h2>
-        <h4 class="mb-6">SELECT SIZE</h4>
-        <div class="block mb-6">
-            <div class="size">
-                <p class="mt-12">S</p>
-            </div>
-            <div class="size">
-                <p class="mt-12">M</p>
-            </div>
-            <div class="size">
-                <p class="mt-12">L</p>
-            </div>
-            <div class="size">
-                <p class="mt-12">XL</p>
-            </div>
-            <div class="size">
-                <p class="mt-12">XXL</p>
-            </div>
-        </div>
-        <div class="block">
-            <div class="addToCart" (click)="addToCart()">
-                <mat-icon class="mt-4">add_shopping_cart</mat-icon>
-                <p class="mt-8">ADD To CART</p>
-            </div>
-            <div class="addToWish" (click)="addToWish()">
-                <mat-icon class="mt-4">bookmark</mat-icon>
-                <p class="mt-8">WISHLIST</p>
-            </div>
-        </div>
-        <div class="delivery">
-            <h3>DELIVERY OPTIONS
-            <mat-icon>flight_takeoff</mat-icon></h3>
-            <input placeholder="Enter PinCode"
-                type="text"
-                id="pinCode"
-                ngModel
-                name="pinCode"
-                #pinCode="ngModel"
-                maxlength="6"
-                pattern="[1-9]{1}[0-9]{5}"
-                style="height: 24px; border-radius: 4px; "
-            >
-            <button type="submit" style="height: 30px; border-radius: 4px; " class="ml-4 padding-horizontal-20 button">Check</button>
-            <p class="mt-6" style="color: #535665">Please enter PIN code to check delivery time & Pay on Delivery Availability</p>
-        </div>
-        <div class="productDetails">
-            <p>Product Details</p>
-        </div>
+    <div class="block">
+      <div class="addToCart">
+        <!-- (click)="addToCart()"> -->
+        <mat-icon class="mt-4">add_shopping_cart</mat-icon>
+        <p class="mt-8">ADD To CART</p>
+      </div>
+      <div class="addToWish">
+        <!--  (click)="addToWish()"> -->
+        <mat-icon class="mt-4">bookmark</mat-icon>
+        <p class="mt-8">WISHLIST</p>
+      </div>
     </div>
-    <div class="similarProducts">
-        <h1 class="title">SIMILAR PRODUCTS</h1>
-        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="space-evenly center">
-            <div fxFlex="25%" fxFlex.xs="80%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7,8]">
-              <mat-card>
-                <img mat-card-image src="https://via.placeholder.com/">
-                <mat-card-content>
-                    <h2>Header</h2>
-                    <h3>Subheader</h3>
-                    <h4>Price</h4>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </div>
+    <div class="delivery">
+      <h3>DELIVERY OPTIONS <mat-icon>flight_takeoff</mat-icon></h3>
+      <input
+        placeholder="Enter PinCode"
+        type="text"
+        id="pinCode"
+        ngModel
+        name="pinCode"
+        #pinCode="ngModel"
+        maxlength="6"
+        pattern="[1-9]{1}[0-9]{5}"
+        style="height: 24px; border-radius: 4px"
+      />
+      <button
+        type="submit"
+        style="height: 30px; border-radius: 4px"
+        class="ml-4 padding-horizontal-20 button"
+      >
+        Check
+      </button>
+      <p class="mt-6" style="color: #535665">
+        Please enter PIN code to check delivery time & Pay on Delivery
+        Availability
+      </p>
     </div>
-    <div class="mt-16 extra">
-        <h1>Extra Details</h1>
+    <div class="productDetails">
+      <p>Product Details</p>
     </div>
+  </div>
+  <div class="similarProducts">
+    <h1 class="title">SIMILAR PRODUCTS</h1>
+    <div
+      class="content"
+      fxLayout="row wrap"
+      fxLayoutGap="16px grid"
+      fxLayoutAlign="space-evenly center"
+    >
+      <div
+        fxFlex="25%"
+        fxFlex.xs="80%"
+        fxFlex.sm="33%"
+        *ngFor="let num of [1, 2, 3, 4, 5, 6, 7, 8]"
+      >
+        <mat-card>
+          <img mat-card-image src="https://via.placeholder.com/" />
+          <mat-card-content>
+            <h2>Header</h2>
+            <h3>Subheader</h3>
+            <h4>Price</h4>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="mt-16 extra">
+    <h1>Extra Details</h1>
+  </div>
 </div>

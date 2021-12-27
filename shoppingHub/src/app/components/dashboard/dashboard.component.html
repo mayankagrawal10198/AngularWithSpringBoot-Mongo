@@ -1,38 +1,78 @@
-<section fxLayout="column" fxLayoutAlign="space-between" class="dashboard-container">
-    <div fxLayoutAlign="start stretch" class="dashboard-container__header">
-        <app-header></app-header>
+<section
+  fxLayout="column"
+  fxLayoutAlign="space-between"
+  class="dashboard-container"
+>
+  <div fxLayoutAlign="start stretch" class="dashboard-container__header">
+    <app-header></app-header>
+  </div>
+  <section fxLayout class="mt-48">
+    <div
+      class="dashboard-container__content pt-48"
+      fxLayout="column"
+      fxFlex="25"
+    >
+      <button
+        mat-icon-button
+        fxShow.sm="false"
+        fxShow.gt-md="false"
+        fxShow="true"
+        color="accent"
+        (click)="toggleMenu()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <app-side-nav
+        [ngClass.xs]="{ 'fxFlex.xs=100': menu }"
+        fxFlex.xs="100"
+        fxFlex.md="40"
+        fxFlex.lg-gt="30"
+      ></app-side-nav>
     </div>
-    <section fxLayout class="mt-48">
-      <div class="dashboard-container__content pt-48" fxLayout="column" fxFlex="25">
-        <button mat-icon-button fxShow.sm="false"  fxShow.gt-md="false" fxShow="true" color="accent" (click)="toggleMenu()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <app-side-nav 
-        [ngClass.xs]="{'fxFlex.xs=100': menu }"
-        fxFlex.xs="100" fxFlex.md="40" fxFlex.lg-gt="30"></app-side-nav>
-      </div>
 
-      <div class="grid container" fxFlex="75" [ngClass.xs]="{'fxFlex.xs=100': menu }">
-        <div class="grid-center pt-48" *ngFor="let title of titles">
-          <h1>{{title}}</h1>
-            <div class="grid-item" *ngFor="let prod of dashboardProd">
-              <div class="grid-item-content"> <!-- (click)="clickEvent($event)"> // [infinite]="true" [autoSlide]="{interval: 1, stopOnHover: true}" -->
-                <ng-image-slider [animationSpeed]="0.5" [imageSize]="{width: '250px', height: '240px', space:4}" [images]="imageObject" [imagePopup]="false" #nav>
-                </ng-image-slider>
-                <!-- <button (click)="prevImageClick()">Prev</button>
-                <button (click)="nextImageClick()">Next</button> -->
-                <div (click)="clickEvent(prod)">
-                  <h2>{{prod.basic.productName}}</h2>
-                  <h3>{{prod.description}}</h3>
-                  <h2>${{prod.basic.productPrice}}</h2>
-                </div>
+    <div
+      class="grid container"
+      fxFlex="75"
+      [ngClass.xs]="{ 'fxFlex.xs=100': menu }"
+    >
+      <div class="grid-center pt-48" *ngFor="let title of titles">
+        <h1>{{ title }}</h1>
+        <div
+          class="grid-item"
+          *ngFor="let prod of dashboardProd; let i = index"
+        >
+          <div class="grid-item-content">
+            <ngx-slick-carousel
+              class="carousel"
+              #slickModal="slick-carousel"
+              [config]="slideConfig"
+            >
+              <div
+                ngxSlickItem
+                *ngFor="let images of getImageArray(i)"
+                class="slide"
+              >
+                <img
+                  alt="images.title"
+                  src="data:image/png;base64,{{ images.image }}"
+                  style="height: 240px; width: 260px; object-fit: cover"
+                />
               </div>
+            </ngx-slick-carousel>
+            <!-- <button (click)="prevImageClick()">Prev</button>
+                <button (click)="nextImageClick()">Next</button> -->
+            <div (click)="clickEvent(prod)">
+              <h2>{{ prod.name }}</h2>
+              <h3>{{ prod.shortDesc }}</h3>
+              <h2>${{ prod.price }}</h2>
             </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-      <!-- <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="space-evenly center">
+  <!-- <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="space-evenly center">
         <div fxFlex="25%" fxFlex.xs="80%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
           <mat-card class="mat-elevation-z4" >
             <mat-card-header>
@@ -52,7 +92,7 @@
         </div>
       </div> -->
 
-    <div class="dashboard-container__footer">
-        <app-footer></app-footer>
-    </div>
+  <div class="dashboard-container__footer">
+    <app-footer></app-footer>
+  </div>
 </section>

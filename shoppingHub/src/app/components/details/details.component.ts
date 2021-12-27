@@ -10,34 +10,32 @@ import { productDetails } from 'src/app/shared/store/interfaces/cart-item.model'
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit, OnDestroy{
-  prod: productDetails = { 
-    basic: { productName: '',
-    productID: '',
-    productCount: 0,
-    productPrice: 0,
-    isFavorite: false
-    },
-    description: '',
-    rating: 0,
+export class DetailsComponent implements OnInit, OnDestroy {
+  prod: productDetails = {
+    itemId: '',
+    name: '',
+    shortDesc: '',
+    longDesc: '',
+    dimensions: '',
+    brand: '',
+    tags: [],
+    price: 0,
+    pics: [],
   };
   favorites: cartItemInterface[] = [];
   favorites$: Observable<cartItemInterface[]>;
   products: cartItemInterface[] = [];
   products$: Observable<cartItemInterface[]>;
-  actSub: Subscription = new Subscription;
-  constructor(
-    private cartService: CartService,
-    private store: Store,
-  ) {
-    this.actSub = this.cartService.getDetail.subscribe(value => {
+  actSub: Subscription = new Subscription();
+  constructor(private cartService: CartService, private store: Store) {
+    this.actSub = this.cartService.getDetail.subscribe((value) => {
       this.prod = value;
     });
-    this.favorites$= this.store.select(state => state.favorites.favorites);
-    this.products$= this.store.select(state => state.products.products);
-   }
+    this.favorites$ = this.store.select((state) => state.favorites.favorites);
+    this.products$ = this.store.select((state) => state.products.products);
+  }
 
   ngOnInit(): void {
     console.log(this.prod);
@@ -45,40 +43,39 @@ export class DetailsComponent implements OnInit, OnDestroy{
 
   getDetails(str: string): string | number {
     let value: string | number = 'Unavailable';
-    switch(str) {
+    switch (str) {
       case 'prodName':
-        return this.prod.basic.productName;
-      break;
+        return this.prod.name;
+        break;
       case 'prodDesc':
-        return this.prod.description;
-      break;
+        return this.prod.shortDesc;
+        break;
       case 'rating':
-        return this.prod.rating;
-      break;
+        return this.prod.brand;
+        break;
       case 'price':
-        return this.prod.basic.productPrice;
-      break;
+        return this.prod.price;
+        break;
       default:
         return value;
     }
   }
 
-  addToCart() {
-    this.store.dispatch(new AddProduct(this.getProdBasic()));
-    alert("Product added in the cart");
-  }
-  addToWish() {
-    this.prod.basic.isFavorite = true;
-    this.store.dispatch(new AddFavorite(this.getProdBasic()));
-    alert("Product added in the Wishlist");
-  }
+  // addToCart() {
+  //   this.store.dispatch(new AddProduct(this.getProdBasic()));
+  //   alert("Product added in the cart");
+  // }
+  // addToWish() {
+  //   this.prod.basic.isFavorite = true;
+  //   this.store.dispatch(new AddFavorite(this.getProdBasic()));
+  //   alert("Product added in the Wishlist");
+  // }
 
-  getProdBasic(): cartItemInterface {
-    return this.prod.basic;
-  }
+  // getProdBasic(): cartItemInterface {
+  //   return this.prod.basic;
+  // }
 
   ngOnDestroy(): void {
     this.actSub.unsubscribe();
   }
-
 }

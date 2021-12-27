@@ -2,10 +2,8 @@ package com.shoppingStore.productsManagement.controller;
 
 import com.shoppingStore.productsManagement.repo.ItemsRepository;
 import com.shoppingStore.productsManagement.repo.UsersRepository;
-import com.shoppingStore.productsManagement.util.NewItem;
-import com.shoppingStore.productsManagement.util.NewUser;
+import com.shoppingStore.productsManagement.util.*;
 import com.shoppingStore.productsManagement.util.ResponseStatus;
-import com.shoppingStore.productsManagement.util.User;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Locale;
 
@@ -65,16 +64,25 @@ public class MyController {
     }
 
     @PostMapping("/addItem")
-    public ResponseEntity addItems(@RequestParam("itemName") String name,@RequestParam("itemDesc") String desc,@RequestParam("itemPrice") int price,@RequestParam("itemPic") MultipartFile file) throws IOException {
-        System.out.println(file);
-        NewItem newItem = new NewItem();
+    public ResponseEntity addItems(@RequestBody NewItem newItem) {
         ResponseStatus res = new ResponseStatus();
-        newItem.setName(name);
-        newItem.setDesc(desc);
-        newItem.setPrice(price);
-        newItem.setPic(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        //newItem.setPic(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
         this.itemsRepository.save(newItem);
-        res.setMessage(Base64.getEncoder().encodeToString(newItem.getPic().getData()));
+        //res.setMessage(Base64.getEncoder().encodeToString(newItem.getPic().getData()));
+        res.setMessage("done");
+        return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/addPicsFor/{id}")
+    public ResponseEntity addPics(@PathVariable("id") String Id,@RequestParam("itemPics") MultipartFile[] files) throws IOException {
+        ResponseStatus res = new ResponseStatus();
+        NewItem newItem = this.itemsRepository.findByItemId(Id);
+        for(MultipartFile file: files){
+            newItem.setPic(new ImageDetails(new Binary(BsonBinarySubType.BINARY, file.getBytes()),new Binary(BsonBinarySubType.BINARY, file.getBytes()),newItem.getName()));
+        }
+        this.itemsRepository.save(newItem);
+        //res.setMessage(Base64.getEncoder().encodeToString(newItem.getPic().getData()));
+        res.setMessage(String.valueOf(newItem));
         return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
     }
 
@@ -87,5 +95,10 @@ public class MyController {
         res.setMessage(Base64.getEncoder().encodeToString(newUser.getPic().getData()));
         //res.setMessage("done");
         return new ResponseEntity<ResponseStatus>(res,HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("getAllItems")
+    public ResponseEntity<ArrayList<NewItem>> getItems(){
+        return new ResponseEntity<ArrayList<NewItem>>(this.itemsRepository.findAll(), HttpStatus.OK);
     }
 }

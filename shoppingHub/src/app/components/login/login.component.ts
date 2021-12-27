@@ -73,7 +73,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         'http://localhost:8080/user'
       );
     }
-    form.reset();
+    form.value.email = '';
+    form.value.pass = '';
   }
 
   signUp() {

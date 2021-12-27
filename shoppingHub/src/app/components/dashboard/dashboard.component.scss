@@ -1,13 +1,12 @@
 .dashboard-container {
-    height: 100%;
-    overflow-wrap: break-word;
+  height: 100%;
+  overflow-wrap: break-word;
 }
 
 .grid-center {
   margin-left: 40px;
   display: inline-block;
 }
-
 
 .grid {
   background: #dbedff;
@@ -33,38 +32,38 @@
   margin: 20px 10px 20px 10px;
   text-align: center;
   -webkit-transition: width 0.4s, height 0.4s;
-          transition: width 0.4s, height 0.4s;
+  transition: width 0.4s, height 0.4s;
 }
 
 .grid-item-content:hover,
 .grid-item-content:focus {
-  -ms-transform: scale(1.1); 
-  -webkit-transform: scale(1.1); 
-  transform: scale(1.1);
+  -ms-transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
   cursor: pointer;
 }
 
 .dashboard-container__header {
-    top: 0;
-    right: 0;
-    left: 0;
-    min-height: 10%;
-    border-bottom: 1px solid #e1e4e8;
-    position: fixed;
-    background-color: #fff;
-    z-index: 10;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-height: 10%;
+  border-bottom: 1px solid #e1e4e8;
+  position: fixed;
+  background-color: #fff;
+  z-index: 100;
 }
 
 .dashboard-container__content {
-    height: 80%;
-    overflow: scroll;
-    border-right: 1px solid #e1e4e8;
+  height: 80%;
+  overflow: scroll;
+  border-right: 1px solid #e1e4e8;
 }
 
 .dashboard-container__footer {
-    min-height: 10%;
-    border-top: 1px solid #e1e4e8;
-    position: sticky;
+  min-height: 10%;
+  border-top: 1px solid #e1e4e8;
+  position: sticky;
 }
 
 .scroll {

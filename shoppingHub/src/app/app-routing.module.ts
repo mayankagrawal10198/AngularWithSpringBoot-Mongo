@@ -8,21 +8,23 @@ import { DetailsComponent } from './components/details/details.component';
 import { LoginComponent } from './components/login/login.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AuthGuardService } from './core/auth-guard/auth-guard.service';
+import { AddItemComponent } from './components/add-item/add-item.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'details', component: DetailsComponent},
+  { path: 'details', component: DetailsComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'wishList', component: WishListComponent},
-  { path:'checkout', component: CheckoutComponent},
-  { path:'account-detail', component: AccountDetailComponent},
+  { path: 'wishList', component: WishListComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'account-detail', component: AccountDetailComponent },
+  { path: 'add-item', component: AddItemComponent },
   // { path: 'details', canActivate: [AuthGuardService], component: DetailsComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

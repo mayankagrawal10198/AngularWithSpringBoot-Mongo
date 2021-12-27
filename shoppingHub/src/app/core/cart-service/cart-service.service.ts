@@ -10,15 +10,15 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class CartService {
   prod: productDetails = {
-    basic: {
-      productName: '',
-      productID: '',
-      productCount: 0,
-      productPrice: 0,
-      isFavorite: false,
-    },
-    description: '',
-    rating: 0,
+    itemId: '',
+    name: '',
+    shortDesc: '',
+    longDesc: '',
+    dimensions: '',
+    brand: '',
+    tags: [],
+    price: 0,
+    pics: [],
   };
   getTotalPrice = new BehaviorSubject<number>(0);
   getUserDetails = new BehaviorSubject<object>({
@@ -27,41 +27,7 @@ export class CartService {
   });
   getDetail = new BehaviorSubject<productDetails>(this.prod);
   //getTotalPrice = new EventEmitter<number>();
-  dashboard: productDetails[] = [
-    {
-      basic: {
-        productName: 'Padded Elite jacket',
-        productID: 'AAAAA',
-        productCount: 2,
-        productPrice: 200,
-        isFavorite: false,
-      },
-      description: 'Universal fitness jacket you can wear every day',
-      rating: 3.5,
-    },
-    {
-      basic: {
-        productName: 'Slim Fit Flat-Front Trousers',
-        productID: 'BBBBB',
-        productCount: 2,
-        productPrice: 20,
-        isFavorite: false,
-      },
-      description: 'Try once and you will never forget',
-      rating: 1,
-    },
-    {
-      basic: {
-        productName: 'Printed Hooded Sweatshirt',
-        productID: 'CCCCC',
-        productCount: 2,
-        productPrice: 180,
-        isFavorite: false,
-      },
-      description: 'Long sleeves, printed and regular',
-      rating: 1,
-    },
-  ];
+  dashboard: productDetails[] = [];
   products: cartItemInterface[] = [
     {
       productName: 'Jeans',
