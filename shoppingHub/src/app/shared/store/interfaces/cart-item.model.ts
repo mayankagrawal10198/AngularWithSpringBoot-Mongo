@@ -5,7 +5,6 @@ export interface cartItemInterface {
   productPrice: number;
   isFavorite: boolean;
 }
-
 export interface productDetails {
   itemId: string;
   name: string;
@@ -17,19 +16,11 @@ export interface productDetails {
   price: number;
   pics: Array<imageInfoBack>;
 }
-
-export interface imageInfo {
-  image: string;
-  thumbImage: string;
-  title: string;
-}
-
 export interface imageInfoBack {
   image: binaryDetails;
   thumbImage: binaryDetails;
   title: string;
 }
-
 export interface binaryDetails {
   type: number;
   data: string;

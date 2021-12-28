@@ -1,7 +1,4 @@
-import {
-  imageInfo,
-  productDetails,
-} from './../../shared/store/interfaces/cart-item.model';
+import { productDetails } from './../../shared/store/interfaces/cart-item.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgImageSliderComponent } from 'ng-image-slider';
@@ -96,22 +93,5 @@ export class DashboardComponent implements OnInit {
         console.log(response);
         this.dashboardProd = response.body;
       });
-  }
-
-  count = 0;
-
-  getImageArray(index: number): Array<imageInfo> {
-    let imageDetails: Array<imageInfo> = [];
-    if (this.dashboardProd != null) {
-      for (let i = 0; i < this.dashboardProd[index].pics.length; i++) {
-        imageDetails.push({
-          image: this.dashboardProd[index].pics[i].image.data,
-          thumbImage: this.dashboardProd[index].pics[i].thumbImage.data,
-          title: this.dashboardProd[index].pics[i].title,
-        });
-      }
-    }
-    console.log(this.count++);
-    return imageDetails;
   }
 }

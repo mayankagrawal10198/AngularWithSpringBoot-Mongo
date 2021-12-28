@@ -41,27 +41,23 @@
           class="grid-item"
           *ngFor="let prod of dashboardProd; let i = index"
         >
-          <div class="grid-item-content">
+          <div class="grid-item-content" (click)="clickEvent(prod)">
             <ngx-slick-carousel
               class="carousel"
               #slickModal="slick-carousel"
               [config]="slideConfig"
             >
-              <div
-                ngxSlickItem
-                *ngFor="let images of getImageArray(i)"
-                class="slide"
-              >
+              <div ngxSlickItem *ngFor="let images of prod.pics" class="slide">
                 <img
                   alt="images.title"
-                  src="data:image/png;base64,{{ images.image }}"
+                  src="data:image/png;base64,{{ images.image.data }}"
                   style="height: 240px; width: 260px; object-fit: cover"
                 />
               </div>
             </ngx-slick-carousel>
             <!-- <button (click)="prevImageClick()">Prev</button>
                 <button (click)="nextImageClick()">Next</button> -->
-            <div (click)="clickEvent(prod)">
+            <div>
               <h2>{{ prod.name }}</h2>
               <h3>{{ prod.shortDesc }}</h3>
               <h2>${{ prod.price }}</h2>

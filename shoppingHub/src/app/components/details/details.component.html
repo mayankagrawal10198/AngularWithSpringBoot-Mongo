@@ -1,15 +1,17 @@
 <div class="container">
   <div class="left">
-    <img class="margin-8 touch" src="http://placehold.it/325x450" />
-    <img class="margin-8 touch" src="http://placehold.it/325x450" />
-    <img class="margin-8 touch" src="http://placehold.it/325x450" />
-    <img class="margin-8 touch" src="http://placehold.it/325x450" />
+    <img
+      *ngFor="let images of prod.pics"
+      alt="{{ images.title }}"
+      src="data:image/png;base64,{{ images.image.data }}"
+      style="height: 450px; width: 325px; object-fit: cover; margin: 10px"
+    />
   </div>
   <div class="right">
-    <h1 class="title">{{ getDetails("prodName") }}</h1>
-    <h2 class="title_sub">{{ getDetails("prodDesc") }}</h2>
-    <h3>Rating:- {{ getDetails("rating") }}</h3>
-    <h2>${{ getDetails("price") }}</h2>
+    <h1 class="title">{{ prod.name }}</h1>
+    <h2 class="title_sub">{{ prod.shortDesc }}</h2>
+    <h3>Brand:- {{ prod.brand }}</h3>
+    <h2>${{ prod.price }}</h2>
     <h4 class="mb-6">SELECT SIZE</h4>
     <div class="block mb-6">
       <div class="size">

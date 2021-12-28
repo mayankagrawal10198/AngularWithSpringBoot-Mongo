@@ -41,26 +41,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     console.log(this.prod);
   }
 
-  getDetails(str: string): string | number {
-    let value: string | number = 'Unavailable';
-    switch (str) {
-      case 'prodName':
-        return this.prod.name;
-        break;
-      case 'prodDesc':
-        return this.prod.shortDesc;
-        break;
-      case 'rating':
-        return this.prod.brand;
-        break;
-      case 'price':
-        return this.prod.price;
-        break;
-      default:
-        return value;
-    }
-  }
-
   // addToCart() {
   //   this.store.dispatch(new AddProduct(this.getProdBasic()));
   //   alert("Product added in the cart");
