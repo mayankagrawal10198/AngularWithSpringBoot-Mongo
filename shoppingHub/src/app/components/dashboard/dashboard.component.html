@@ -41,7 +41,7 @@
           class="grid-item"
           *ngFor="let prod of dashboardProd; let i = index"
         >
-          <div class="grid-item-content" (click)="clickEvent(prod)">
+          <div class="grid-item-content">
             <ngx-slick-carousel
               class="carousel"
               #slickModal="slick-carousel"
@@ -57,7 +57,7 @@
             </ngx-slick-carousel>
             <!-- <button (click)="prevImageClick()">Prev</button>
                 <button (click)="nextImageClick()">Next</button> -->
-            <div>
+            <div (click)="clickEvent(prod)">
               <h2>{{ prod.name }}</h2>
               <h3>{{ prod.shortDesc }}</h3>
               <h2>${{ prod.price }}</h2>

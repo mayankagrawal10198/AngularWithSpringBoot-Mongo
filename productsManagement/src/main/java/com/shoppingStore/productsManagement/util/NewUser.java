@@ -4,6 +4,10 @@ import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 @Document(collection = "users")
 public class NewUser {
     @Id
@@ -14,7 +18,8 @@ public class NewUser {
     private Dob dob;
     private Binary pic;
     //private Address address;
-
+    private List<NewItem> cart = new LinkedList<>();
+    private List<NewItem> fav = new LinkedList<>();
     public NewUser() {
 
     }
